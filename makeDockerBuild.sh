@@ -31,6 +31,9 @@ docker image build buildAl2023 --platform=linux/amd64 --no-cache=true --build-ar
 echo "ARKIME DOCKER Al2023 arm"
 docker image build buildAl2023 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-al2023-arm64:$VER
 
+echo "ARKIME DOCKER 22 arm"
+docker image build build22-arm --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-22-arm64:$VER
+
 
 exit 0
 
@@ -43,3 +46,4 @@ docker push andywick/arkime-build-22:$VER
 docker push andywick/arkime-build-arch:$VER
 docker push andywick/arkime-build-al2023:$VER
 docker push andywick/arkime-build-al2023-arm64:$VER
+docker push andywick/arkime-build-22-arm64:$VER
