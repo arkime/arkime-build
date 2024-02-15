@@ -21,6 +21,9 @@ docker image build build20 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRA
 
 echo "ARKIME DOCKER 22"
 docker image build build22 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-22:$VER
+t
+echo "ARKIME DOCKER 24"
+docker image build build22 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-24:$VER
 
 echo "ARKIME DOCKER Arch"
 docker image build buildArch --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-arch:$VER
@@ -34,6 +37,9 @@ docker image build buildAl2023 --platform=linux/arm64 --no-cache=true --build-ar
 echo "ARKIME DOCKER 22 arm"
 docker image build build22-arm --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-22-arm64:$VER
 
+echo "ARKIME DOCKER 24 arm"
+docker image build build24-arm --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-24-arm64:$VER
+
 
 exit 0
 
@@ -43,7 +49,9 @@ docker push andywick/arkime-build-9:$VER
 docker push andywick/arkime-build-18:$VER
 docker push andywick/arkime-build-20:$VER
 docker push andywick/arkime-build-22:$VER
+docker push andywick/arkime-build-24:$VER
 docker push andywick/arkime-build-arch:$VER
 docker push andywick/arkime-build-al2023:$VER
 docker push andywick/arkime-build-al2023-arm64:$VER
 docker push andywick/arkime-build-22-arm64:$VER
+docker push andywick/arkime-build-24-arm64:$VER
