@@ -1,5 +1,5 @@
 #!/bin/sh
-export VER=5.0.0-3
+export VER=5.0.0-4
 export ARKIME_BRANCH=main
 
 #docker images -a | grep "arkime-build" | awk '{print $3}' | xargs docker rmi
@@ -21,7 +21,7 @@ docker image build build20 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRA
 
 echo "ARKIME DOCKER 22"
 docker image build build22 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-22:$VER
-t
+
 echo "ARKIME DOCKER 24"
 docker image build build24 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-24:$VER
 
@@ -47,7 +47,6 @@ docker image build build24 --platform=linux/arm64 --no-cache=true --build-arg AR
 
 echo "ARKIME DOCKER D12 arm"
 docker image build buildD12 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-d12-arm64:$VER
-
 
 exit 0
 
