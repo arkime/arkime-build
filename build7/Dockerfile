@@ -3,6 +3,8 @@ MAINTAINER Andy Wick <andy.wick@oath.com>
 ARG ARKIME_BRANCH=main
 
 RUN \
+sed --in-place=.orig --regexp-extended 's%# *baseurl=http://mirror.centos.org%baseurl=https://vault.centos.org%g' /etc/yum.repos.d/CentOS-*.repo; \
+sed --in-place --regexp-extended 's%^mirrorlist=%#mirrorlist=%g' /etc/yum.repos.d/CentOS-*.repo; \
 yum -y update; \
 yum -y install centos-release-scl scl-utils centos-release-scl-rh wget; \
 yum -y update; \
