@@ -1,5 +1,5 @@
 FROM amazonlinux:2023
-MAINTAINER Andy Wick <andy.wick@oath.com>
+MAINTAINER Andy Wick <awick@purple.org>
 ARG ARKIME_BRANCH=main
 
 RUN \

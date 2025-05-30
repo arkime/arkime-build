@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER Andy Wick <andy.wick@oath.com>
+MAINTAINER Andy Wick <awick@purple.org>
 ARG ARKIME_BRANCH=main
 
 ENV DEBIAN_FRONTEND=noninteractive

@@ -1,5 +1,5 @@
 FROM almalinux:9
-MAINTAINER Andy Wick <andy.wick@oath.com>
+MAINTAINER Andy Wick <awick@purple.org>
 ARG ARKIME_BRANCH=main
 
 RUN \

@@ -1,5 +1,5 @@
 FROM --platform=linux/amd64 archlinux:latest
-MAINTAINER Andy Wick <andy.wick@oath.com>
+MAINTAINER Andy Wick <awick@purple.org>
 
 RUN pacman-key --init
 RUN pacman -Sy --noconfirm  archlinux-keyring  ca-certificates
