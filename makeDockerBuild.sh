@@ -11,7 +11,7 @@ echo "ARKIME DOCKER 9"
 docker image build build9 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-9:$VER
 
 echo "ARKIME DOCKER 10"
-docker image build build10 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-10:$VER
+docker image build build10 --platform=linux/amd64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-10:$VER
 
 echo "ARKIME DOCKER 20"
 docker image build build20 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-20:$VER
@@ -55,7 +55,7 @@ echo "ARKIME DOCKER 9 arm"
 docker image build build9 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-9-arm64:$VER
 
 echo "ARKIME DOCKER 10 arm"
-docker image build build9 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-10-arm64:$VER
+docker image build build10 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-10-arm64:$VER
 
 exit 0
 

@@ -11,7 +11,7 @@ rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
 yum -y clean all && \
 yum -y install --allowerasing curl && \
 git clone https://github.com/arkime/arkime && \
-(cd arkime; git checkout $ARKIME_BRANCH; ./easybutton-build.sh --nothirdparty --daq --kafka) && \
+(cd arkime; git checkout $ARKIME_BRANCH; ./easybutton-build.sh --daq --kafka) && \
 mv arkime/thirdparty / && \
 rm -rf /thirdparty/glib*/*/tests /thirdparty/glib*/*/*/tests && \
 rm -rf arkime && \
