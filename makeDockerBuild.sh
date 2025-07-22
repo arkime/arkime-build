@@ -52,7 +52,7 @@ echo "ARKIME DOCKER D13 arm"
 docker image build buildD13 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-d13-arm64:$VER
 
 echo "ARKIME DOCKER 9 arm"
-docker image build build9 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-9-arm64:$VER
+docker image build build9-arm --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-9-arm64:$VER
 
 echo "ARKIME DOCKER 10 arm"
 docker image build build10 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-10-arm64:$VER
