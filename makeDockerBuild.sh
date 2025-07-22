@@ -1,5 +1,5 @@
 #!/bin/sh
-export VER=5.0.0-7
+export VER=6.0.0-1
 export ARKIME_BRANCH=main
 
 #docker images -a | grep "arkime-build" | awk '{print $3}' | xargs docker rmi
@@ -62,7 +62,6 @@ exit 0
 docker push andywick/arkime-build-8:$VER
 docker push andywick/arkime-build-9:$VER
 docker push andywick/arkime-build-10:$VER
-docker push andywick/arkime-build-20:$VER
 docker push andywick/arkime-build-22:$VER
 docker push andywick/arkime-build-24:$VER
 docker push andywick/arkime-build-arch:$VER
