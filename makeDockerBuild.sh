@@ -1,5 +1,5 @@
 #!/bin/sh
-export VER=6.0.0-3
+export VER=6.0.0-4
 export ARKIME_BRANCH=main
 
 #docker images -a | grep "arkime-build" | awk '{print $3}' | xargs docker rmi
@@ -21,6 +21,9 @@ docker image build build22 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRA
 
 echo "ARKIME DOCKER 24"
 docker image build build24 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-24:$VER
+
+echo "ARKIME DOCKER 26"
+docker image build build26 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-26:$VER
 
 echo "ARKIME DOCKER Arch"
 docker image build buildArch --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-arch:$VER
@@ -45,6 +48,9 @@ docker image build build22-arm --platform=linux/arm64 --no-cache=true --build-ar
 echo "ARKIME DOCKER 24 arm"
 docker image build build24 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-24-arm64:$VER
 
+echo "ARKIME DOCKER 26 arm"
+docker image build build26 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-26-arm64:$VER
+
 echo "ARKIME DOCKER D12 arm"
 docker image build buildD12 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-d12-arm64:$VER
 
@@ -64,6 +70,7 @@ docker push andywick/arkime-build-9:$VER
 docker push andywick/arkime-build-10:$VER
 docker push andywick/arkime-build-22:$VER
 docker push andywick/arkime-build-24:$VER
+docker push andywick/arkime-build-26:$VER
 docker push andywick/arkime-build-arch:$VER
 docker push andywick/arkime-build-al2023:$VER
 docker push andywick/arkime-build-d12:$VER
@@ -74,5 +81,6 @@ docker push andywick/arkime-build-10-arm64:$VER
 docker push andywick/arkime-build-al2023-arm64:$VER
 docker push andywick/arkime-build-22-arm64:$VER
 docker push andywick/arkime-build-24-arm64:$VER
+docker push andywick/arkime-build-26-arm64:$VER
 docker push andywick/arkime-build-d12-arm64:$VER
 docker push andywick/arkime-build-d13-arm64:$VER

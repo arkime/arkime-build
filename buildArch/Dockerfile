@@ -4,7 +4,7 @@ MAINTAINER Andy Wick <awick@purple.org>
 RUN pacman-key --init
 RUN pacman -Sy --noconfirm  archlinux-keyring  ca-certificates
 RUN pacman -Syu --noconfirm gcc ruby ruby-rubygems make python-pip git perl-test-differences sudo wget gawk \
-lua geoip yara file libpcap libmaxminddb libnet lua libtool autoconf gettext automake perl-http-message perl-lwp-protocol-https perl-json perl-socket6 openssh
+lua geoip yara file libpcap libmaxminddb libnet lua libtool autoconf gettext automake perl-http-message perl-lwp-protocol-https perl-json perl-socket6 openssh aws-cli
 
 RUN gem install --no-document fpm rexml
 
