@@ -5,7 +5,7 @@ ARG ARKIME_BRANCH=main
 RUN \
 yum -y update && \
 dnf -y install 'dnf-command(config-manager)' && \
-yum -y install git sudo perl-Test perl-Test-Simple bzip2 wget ruby-devel rubygems rpm-build pango which make python3-pip gcc gcc-c++ perl-Test-Harness && \
+yum -y install git sudo perl-Test perl-Test-Simple bzip2 wget ruby-devel rubygems rpm-build pango which make python3-pip gcc gcc-c++ perl-Test-Harness libubsan libasan && \
 (cd /etc/yum.repos.d/; wget https://packages.ntop.org/centos/ntop.repo) && \
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
 /usr/bin/crb enable && \
@@ -13,7 +13,7 @@ yum -y clean all && \
 yum -y install pfring && \
 yum -y install --allowerasing curl && \
 git clone https://github.com/arkime/arkime && \
-(cd arkime; git checkout $ARKIME_BRANCH; ./easybutton-build.sh --daq --pfring --kafka) && \
+(cd arkime; git checkout $ARKIME_BRANCH; ./easybutton-build.sh --thirdparty --pfring --kafka) && \
 mv arkime/thirdparty / && \
 rm -rf /thirdparty/glib*/*/tests /thirdparty/glib*/*/*/tests && \
 rm -rf arkime && \
