@@ -5,7 +5,7 @@ ARG ARKIME_BRANCH=main
 RUN \
 yum -y update && \
 dnf -y install 'dnf-command(config-manager)' && \
-yum -y install git sudo perl-Test perl-Test-Simple bzip2 wget ruby-devel rubygems rpm-build pango which make python3-pip gcc gcc-c++ perl-Test-Harness && \
+yum -y install curl git sudo perl-Test perl-Test-Simple bzip2 ruby-devel rubygems rpm-build pango which make python3-pip gcc gcc-c++ perl-Test-Harness && \
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm && \
 /usr/bin/crb enable && \
 yum -y clean all && \

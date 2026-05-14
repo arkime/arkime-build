@@ -4,17 +4,17 @@ ARG ARKIME_BRANCH=main
 
 RUN \
 yum -y update && \
-yum -y install git sudo perl-Test perl-Test-Simple bzip2 wget rpm-build pango which make python3-pip gcc gcc-c++ perl-Test-Harness libubsan libasan && \
+yum -y install curl git sudo perl-Test perl-Test-Simple bzip2 rpm-build pango which make python3-pip gcc gcc-c++ perl-Test-Harness libubsan libasan && \
 dnf module install ruby:3.0 && \
 gem install --no-document fpm && \
-(cd /etc/yum.repos.d/; wget https://packages.ntop.org/centos/ntop.repo) && \
+(cd /etc/yum.repos.d/; curl -sSfLO https://packages.ntop.org/centos/ntop.repo) && \
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
 rpm -ivh http://rpms.remirepo.net/enterprise/remi-release-8.rpm && \
-yum -y install dnf-plugins-core && \
+yum -y install curl dnf-plugins-core && \
 dnf config-manager --set-enabled ol8_codeready_builder && \
 dnf config-manager --set-enabled remi && \
 yum -y clean all && \
-yum -y install pfring && \
+yum -y install curl pfring && \
 git clone https://github.com/arkime/arkime && \
 (cd arkime; git checkout $ARKIME_BRANCH; ./easybutton-build.sh --thirdparty --pfring --kafka) && \
 mv arkime/thirdparty / && \
