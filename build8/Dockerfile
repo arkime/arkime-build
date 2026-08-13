@@ -4,7 +4,7 @@ ARG ARKIME_BRANCH=main
 
 RUN \
 yum -y update && \
-yum -y install curl git sudo perl-Test perl-Test-Simple bzip2 rpm-build pango which make python3-pip gcc gcc-c++ perl-Test-Harness libubsan libasan && \
+yum -y install curl git sudo perl-Test perl-Test-Simple bzip2 rpm-build pango which make python3-pip gcc gcc-c++ gcc-toolset-14 perl-Test-Harness libubsan libasan && \
 dnf module install ruby:3.0 && \
 gem install --no-document fpm && \
 (cd /etc/yum.repos.d/; curl -sSfLO https://packages.ntop.org/centos/ntop.repo) && \
