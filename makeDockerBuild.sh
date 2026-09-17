@@ -1,5 +1,5 @@
 #!/bin/sh
-export VER=6.0.0-8
+export VER=7.0.0-1
 export ARKIME_BRANCH=main
 
 #docker images -a | grep "arkime-build" | awk '{print $3}' | xargs docker rmi
@@ -31,6 +31,9 @@ docker image build buildArch --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_B
 echo "ARKIME DOCKER Al2023"
 docker image build buildAl2023 --platform=linux/amd64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-al2023:$VER
 
+echo "ARKIME DOCKER Al2027"
+docker image build buildAl2027 --platform=linux/amd64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-al2027:$VER
+
 echo "ARKIME DOCKER D12"
 docker image build buildD12 --platform=linux/amd64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-d12:$VER
 
@@ -44,6 +47,9 @@ docker image build buildF44 --platform=linux/amd64 --no-cache=true --build-arg A
 
 echo "ARKIME DOCKER Al2023 arm"
 docker image build buildAl2023 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-al2023-arm64:$VER
+
+echo "ARKIME DOCKER Al2027 arm"
+docker image build buildAl2027 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-al2027-arm64:$VER
 
 echo "ARKIME DOCKER 22 arm"
 docker image build build22-arm --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-22-arm64:$VER
@@ -79,6 +85,7 @@ docker push andywick/arkime-build-24:$VER
 docker push andywick/arkime-build-26:$VER
 docker push andywick/arkime-build-arch:$VER
 docker push andywick/arkime-build-al2023:$VER
+docker push andywick/arkime-build-al2027:$VER
 docker push andywick/arkime-build-d12:$VER
 docker push andywick/arkime-build-d13:$VER
 docker push andywick/arkime-build-f44:$VER
@@ -86,6 +93,7 @@ docker push andywick/arkime-build-f44:$VER
 docker push andywick/arkime-build-9-arm64:$VER
 docker push andywick/arkime-build-10-arm64:$VER
 docker push andywick/arkime-build-al2023-arm64:$VER
+docker push andywick/arkime-build-al2027-arm64:$VER
 docker push andywick/arkime-build-22-arm64:$VER
 docker push andywick/arkime-build-24-arm64:$VER
 docker push andywick/arkime-build-26-arm64:$VER
