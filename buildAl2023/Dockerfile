@@ -8,7 +8,7 @@ yum -y install curl git sudo perl-Test perl-Test-Simple bzip2 ruby-devel rubygem
 yum -y clean all && \
 yum -y install --allowerasing curl && \
 git clone https://github.com/arkime/arkime && \
-(cd arkime; git checkout $ARKIME_BRANCH; ./easybutton-build.sh --kafka) && \
+(cd arkime; git checkout $ARKIME_BRANCH; ./easybutton-build.sh --thirdparty --kafka) && \
 mv arkime/thirdparty / && \
 rm -f /thirdparty/*/*.o /thirdparty/*/*/*.o && \
 rm -rf arkime && \

@@ -4,9 +4,6 @@ export ARKIME_BRANCH=main
 
 #docker images -a | grep "arkime-build" | awk '{print $3}' | xargs docker rmi
 
-echo "ARKIME DOCKER 8"
-docker image build build8 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-8:$VER
-
 echo "ARKIME DOCKER 9"
 docker image build build9 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-9:$VER
 
@@ -77,7 +74,6 @@ docker image build build10 --platform=linux/arm64 --no-cache=true --build-arg AR
 
 exit 0
 
-docker push andywick/arkime-build-8:$VER
 docker push andywick/arkime-build-9:$VER
 docker push andywick/arkime-build-10:$VER
 docker push andywick/arkime-build-22:$VER
