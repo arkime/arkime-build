@@ -6,6 +6,8 @@ RUN \
 yum -y update && \
 dnf -y install 'dnf-command(config-manager)' && \
 yum -y install --allowerasing curl git sudo perl-Test perl-Test-Simple bzip2 ruby-devel rubygems rpm-build pango which make python3-pip gcc gcc-c++ perl-Test-Harness && \
+# pam_unix 1.5.x fails sudo's PAM account check under BuildKit on GitHub runners, easybutton needs sudo
+echo 'Defaults !pam_acct_mgmt' >> /etc/sudoers && \
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
 /usr/bin/crb enable && \
 yum -y clean all && \
