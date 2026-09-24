@@ -1,0 +1,164 @@
+name: Build containers
+
+# Rebuilds the Arkime build containers. Every image in .github/images.json is
+# built as its own matrix job, so they run in parallel and a single failure can
+# be re-run on its own instead of restarting the whole set.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Image tag, e.g. 6.0.0-8'
+        required: true
+        type: string
+      arkime_branch:
+        description: 'Arkime branch to build from'
+        required: true
+        default: 'main'
+        type: string
+      targets:
+        description: 'Comma-separated image names to build, blank for all. e.g. 9,26,f44-arm64'
+        required: false
+        default: ''
+        type: string
+      registry:
+        description: 'Push the images to GHCR, or just build them'
+        required: true
+        default: 'ghcr'
+        type: choice
+        options:
+          - ghcr
+          - none
+      tag_latest:
+        description: 'Also tag :latest'
+        required: false
+        default: false
+        type: boolean
+
+# Only one full rebuild at a time.
+concurrency:
+  group: build-containers
+  cancel-in-progress: false
+
+jobs:
+  matrix:
+    name: Select images
+    runs-on: ubuntu-latest
+    outputs:
+      images: ${{ steps.select.outputs.images }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select images
+        id: select
+        env:
+          TARGETS: ${{ inputs.targets }}
+        run: |
+          set -euo pipefail
+          if [ -z "${TARGETS// /}" ]; then
+            images=$(jq -c . .github/images.json)
+          else
+            wanted=$(echo "$TARGETS" | tr ',' '\n' | sed 's/^ *//;s/ *$//;/^$/d' | jq -R . | jq -sc .)
+
+            # Fail loudly on a typo rather than silently building nothing.
+            missing=$(jq -r --argjson w "$wanted" '($w - map(.name)) | join(", ")' .github/images.json)
+            if [ -n "$missing" ]; then
+              echo "::error::Unknown target(s): $missing"
+              exit 1
+            fi
+
+            images=$(jq -c --argjson w "$wanted" '[.[] | select(.name as $n | $w | index($n))]' .github/images.json)
+          fi
+          echo "images=$images" >> "$GITHUB_OUTPUT"
+          jq -r '.[] | "- arkime-build-\(.name) (\(.dir), \(.platform))"' <<<"$images" >> "$GITHUB_STEP_SUMMARY"
+
+  build:
+    name: arkime-build-${{ matrix.image.name }}
+    needs: matrix
+    runs-on: ${{ matrix.image.runner }}
+    timeout-minutes: 360
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        image: ${{ fromJSON(needs.matrix.outputs.images) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # The thirdparty builds are large; the stock runner image does not leave
+      # enough room on / without this.
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc \
+                      /usr/local/share/boost /opt/hostedtoolcache/CodeQL || true
+          df -h /
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        if: inputs.registry == 'ghcr'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compute tags
+        id: tags
+        env:
+          IMAGE: arkime-build-${{ matrix.image.name }}
+          VERSION: ${{ inputs.version }}
+          REGISTRY: ${{ inputs.registry }}
+          TAG_LATEST: ${{ inputs.tag_latest }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          owner=$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')
+          tags=""
+          add() {
+            if [ -z "$tags" ]; then tags="$1"; else tags="$tags
+          $1"; fi
+          }
+
+          if [ "$REGISTRY" = "ghcr" ]; then
+            add "ghcr.io/$owner/$IMAGE:$VERSION"
+            if [ "$TAG_LATEST" = "true" ]; then add "ghcr.io/$owner/$IMAGE:latest"; fi
+          else
+            # Build-only runs still need something to tag.
+            add "$IMAGE:$VERSION"
+          fi
+
+          {
+            echo "tags<<EOF"
+            echo "$tags"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.image.dir }}
+          platforms: ${{ matrix.image.platform }}
+          push: ${{ inputs.registry == 'ghcr' }}
+          no-cache: true
+          provenance: false
+          build-args: |
+            ARKIME_BRANCH=${{ inputs.arkime_branch }}
+          tags: ${{ steps.tags.outputs.tags }}
+          # Keeps the packages linked to this repo, not arkime/arkime
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.description=Arkime build container for ${{ matrix.image.name }}
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### arkime-build-${{ matrix.image.name }}"
+            echo '```'
+            echo "${{ steps.tags.outputs.tags }}"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

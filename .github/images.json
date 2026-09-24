@@ -1,0 +1,24 @@
+[
+  { "name": "9",           "dir": "build9",      "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "10",          "dir": "build10",     "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "22",          "dir": "build22",     "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "24",          "dir": "build24",     "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "26",          "dir": "build26",     "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "arch",        "dir": "buildArch",   "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "al2023",      "dir": "buildAl2023", "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "al2027",      "dir": "buildAl2027", "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "d12",         "dir": "buildD12",    "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "d13",         "dir": "buildD13",    "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "f44",         "dir": "buildF44",    "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+
+  { "name": "9-arm64",      "dir": "build9-arm",  "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "10-arm64",     "dir": "build10",     "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "22-arm64",     "dir": "build22-arm", "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "24-arm64",     "dir": "build24",     "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "26-arm64",     "dir": "build26",     "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "al2023-arm64", "dir": "buildAl2023", "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "al2027-arm64", "dir": "buildAl2027", "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "d12-arm64",    "dir": "buildD12",    "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "d13-arm64",    "dir": "buildD13",    "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "f44-arm64",    "dir": "buildF44",    "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" }
+]
