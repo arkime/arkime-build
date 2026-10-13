@@ -10,6 +10,7 @@
   { "name": "d12",         "dir": "buildD12",    "platform": "linux/amd64", "runner": "ubuntu-24.04" },
   { "name": "d13",         "dir": "buildD13",    "platform": "linux/amd64", "runner": "ubuntu-24.04" },
   { "name": "f44",         "dir": "buildF44",    "platform": "linux/amd64", "runner": "ubuntu-24.04" },
+  { "name": "alpine324",   "dir": "buildAlpine324", "platform": "linux/amd64", "runner": "ubuntu-24.04" },
 
   { "name": "9-arm64",      "dir": "build9-arm",  "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
   { "name": "10-arm64",     "dir": "build10",     "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
@@ -20,5 +21,6 @@
   { "name": "al2027-arm64", "dir": "buildAl2027", "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
   { "name": "d12-arm64",    "dir": "buildD12",    "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
   { "name": "d13-arm64",    "dir": "buildD13",    "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
-  { "name": "f44-arm64",    "dir": "buildF44",    "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" }
+  { "name": "f44-arm64",    "dir": "buildF44",    "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" },
+  { "name": "alpine324-arm64", "dir": "buildAlpine324", "platform": "linux/arm64", "runner": "ubuntu-24.04-arm" }
 ]

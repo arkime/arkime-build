@@ -40,6 +40,9 @@ docker image build buildD13 --platform=linux/amd64 --no-cache=true --build-arg A
 echo "ARKIME DOCKER F44"
 docker image build buildF44 --platform=linux/amd64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-f44:$VER
 
+echo "ARKIME DOCKER Alpine 3.24"
+docker image build buildAlpine324 --platform=linux/amd64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-alpine324:$VER
+
 ### ARM
 
 echo "ARKIME DOCKER Al2023 arm"
@@ -72,6 +75,9 @@ docker image build build9-arm --platform=linux/arm64 --no-cache=true --build-arg
 echo "ARKIME DOCKER 10 arm"
 docker image build build10 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-10-arm64:$VER
 
+echo "ARKIME DOCKER Alpine 3.24 arm"
+docker image build buildAlpine324 --platform=linux/arm64 --no-cache=true --build-arg ARKIME_BRANCH=$ARKIME_BRANCH --tag andywick/arkime-build-alpine324-arm64:$VER
+
 exit 0
 
 docker push andywick/arkime-build-9:$VER
@@ -85,6 +91,7 @@ docker push andywick/arkime-build-al2027:$VER
 docker push andywick/arkime-build-d12:$VER
 docker push andywick/arkime-build-d13:$VER
 docker push andywick/arkime-build-f44:$VER
+docker push andywick/arkime-build-alpine324:$VER
 
 docker push andywick/arkime-build-9-arm64:$VER
 docker push andywick/arkime-build-10-arm64:$VER
@@ -96,3 +103,4 @@ docker push andywick/arkime-build-26-arm64:$VER
 docker push andywick/arkime-build-d12-arm64:$VER
 docker push andywick/arkime-build-d13-arm64:$VER
 docker push andywick/arkime-build-f44-arm64:$VER
+docker push andywick/arkime-build-alpine324-arm64:$VER
