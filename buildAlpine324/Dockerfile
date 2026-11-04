@@ -7,3 +7,10 @@ RUN apk add --no-cache bash sudo git curl perl make g++ linux-headers tzdata zst
 git clone https://github.com/arkime/arkime && \
 (cd arkime; git checkout $ARKIME_BRANCH; ./easybutton-build.sh --kafka) && \
 rm -rf arkime
+
+# The test data tests.pl would otherwise download every run, arkime's CI links it into tests/
+RUN mkdir -p /arkime-test-data && cd /arkime-test-data && \
+curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/ipv4-address-space.csv && \
+curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/oui.txt && \
+curl -sSfLO --retry 3 https://media.githubusercontent.com/media/arkime/arkime-test-data/main/GeoLite2-City.mmdb && \
+curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/GeoLite2-ASN.mmdb

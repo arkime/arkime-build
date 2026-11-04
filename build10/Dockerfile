@@ -20,3 +20,10 @@ pip3 install awscli && \
 useradd -u 2000 elasticsearch && \
 yum -y clean all && \
 rm -rf /var/cache/yum
+
+# The test data tests.pl would otherwise download every run, arkime's CI links it into tests/
+RUN mkdir -p /arkime-test-data && cd /arkime-test-data && \
+curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/ipv4-address-space.csv && \
+curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/oui.txt && \
+curl -sSfLO --retry 3 https://media.githubusercontent.com/media/arkime/arkime-test-data/main/GeoLite2-City.mmdb && \
+curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/GeoLite2-ASN.mmdb
