@@ -16,6 +16,11 @@ useradd -u 2000 elasticsearch && \
 dnf -y clean all && \
 rm -rf /var/cache/dnf
 
+# The clickhouse viewer tests
+RUN cd /tmp && curl -sSfL https://clickhouse.com/ | sh && \
+mv clickhouse /usr/local/bin/clickhouse && \
+clickhouse --version
+
 # The test data tests.pl would otherwise download every run, arkime's CI links it into tests/
 RUN mkdir -p /arkime-test-data && cd /arkime-test-data && \
 curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/ipv4-address-space.csv && \

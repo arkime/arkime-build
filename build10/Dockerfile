@@ -21,6 +21,14 @@ useradd -u 2000 elasticsearch && \
 yum -y clean all && \
 rm -rf /var/cache/yum
 
+# The noes viewer tests keep the sessions in ClickHouse and the rest in Postgres
+RUN yum -y install postgresql-server && \
+yum -y clean all && \
+rm -rf /var/cache/yum && \
+cd /tmp && curl -sSfL https://clickhouse.com/ | sh && \
+mv clickhouse /usr/local/bin/clickhouse && \
+clickhouse --version
+
 # The test data tests.pl would otherwise download every run, arkime's CI links it into tests/
 RUN mkdir -p /arkime-test-data && cd /arkime-test-data && \
 curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/ipv4-address-space.csv && \
