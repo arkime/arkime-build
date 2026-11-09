@@ -10,10 +10,9 @@ RUN gem install --no-document fpm rexml
 
 RUN useradd -u 2000 opensearch; \
 (cd / ; \
- curl -sSfLO https://artifacts.opensearch.org/releases/core/opensearch/2.7.0/opensearch-min-2.7.0-linux-x64.tar.gz; \
- tar xf opensearch-min-2.7.0-linux-x64.tar.gz; \
- chown -R opensearch opensearch-2.7.0; \
- rm -f opensearch-min-2.7.0-linux-x64.tar.gz \
+ curl -sSfL --retry 3 https://artifacts.opensearch.org/releases/core/opensearch/3.9.0/opensearch-min-3.9.0-linux-x64.tar.gz | tar xzf - && \
+ mv opensearch-3.9.0 opensearch && \
+ chown -R opensearch opensearch \
 );
 
 # The test data tests.pl would otherwise download every run, arkime's CI links it into tests/

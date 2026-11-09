@@ -12,6 +12,15 @@ git clone https://github.com/arkime/arkime && \
 rm -rf arkime && \
 rm -rf /var/lib/apt/lists/*
 
+# Elasticsearch 9 for the es9 viewer tests, security off so no passwords
+RUN useradd -u 2000 elasticsearch && \
+(cd / && \
+ curl -sSfL --retry 3 https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-9.5.6-linux-$(uname -m).tar.gz | tar xzf - && \
+ mv elasticsearch-9.5.6 elasticsearch && \
+ printf '%s\n' 'discovery.type: single-node' 'xpack.security.enabled: false' 'xpack.ml.enabled: false' 'ingest.geoip.downloader.enabled: false' 'cluster.routing.allocation.disk.threshold_enabled: false' >> elasticsearch/config/elasticsearch.yml && \
+ chown -R elasticsearch elasticsearch \
+)
+
 # The test data tests.pl would otherwise download every run, arkime's CI links it into tests/
 RUN mkdir -p /arkime-test-data && cd /arkime-test-data && \
 curl -sSfLO --retry 3 https://raw.githubusercontent.com/arkime/arkime-test-data/main/ipv4-address-space.csv && \
