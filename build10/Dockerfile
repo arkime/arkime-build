@@ -22,7 +22,7 @@ yum -y clean all && \
 rm -rf /var/cache/yum
 
 # The noes viewer tests keep the sessions in ClickHouse and the rest in Postgres
-RUN yum -y install postgresql-server && \
+RUN yum -y install postgresql-server postgresql-contrib && \
 yum -y clean all && \
 rm -rf /var/cache/yum && \
 cd /tmp && curl -sSfL https://clickhouse.com/ | sh && \
